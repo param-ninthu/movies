@@ -7,8 +7,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { NavLink } from "react-router-dom";
 const Header = () => {
-  return;
-  <>
+  return (
     <Navbar bg="dark" variant="dark" expand="lg">
       <Container fluid>
         <Navbar.Brand href="/" style={{ color: "gold" }}>
@@ -36,8 +35,6 @@ const Header = () => {
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    ;
-  </>;
+  );
 };
-
 export default Header;
