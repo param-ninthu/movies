@@ -31,7 +31,9 @@ const Header = () => {
           <Button variant="outline-info" className="me-2">
             Login
           </Button>
-          <Button variant="outline-info">Register</Button>
+          <NavLink className="nav-link" to="/registration">
+            <Button variant="outline-info">Register</Button>
+          </NavLink>
         </Navbar.Collapse>
       </Container>
     </Navbar>
