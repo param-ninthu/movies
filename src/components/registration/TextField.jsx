@@ -1,14 +1,23 @@
 import { FormControl, TextField } from "@mui/material";
 import React from "react";
+import { useForm, Controller } from "react-hook-form";
 
-const TextFields = ({ label, inputProps }) => {
+const TextFields = ({ label, inputProps, control, name }) => {
   return (
     <FormControl fullWidth sx={{ mb: "1rem" }}>
-      <TextField
-        required
-        inputProps={inputProps}
-        label={label}
-        variant="filled"
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => (
+          <TextField
+            {...field}
+            required
+            inputProps={inputProps}
+            label={label}
+            variant="filled"
+            size="small"
+          />
+        )}
       />
     </FormControl>
   );
