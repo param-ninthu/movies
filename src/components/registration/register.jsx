@@ -10,19 +10,28 @@ import { Box, Container, Button } from "@mui/material";
 import TextFields from "./TextField";
 import CheckBoxFields from "./CheckBoxFields";
 
+const schema = yup.object({
+  name: yup.string().required("Name is required"),
+});
+
 const Register = () => {
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       name: "",
       email: "",
       password: "",
       cpassword: "",
-      privacy: false,
     },
+    resolver: yupResolver(schema),
   });
   const onSubmit = (data) => {
     console.log(data);
   };
+
   return (
     <Box
       sx={{
@@ -57,15 +66,31 @@ const Register = () => {
             flexDirection: "column",
           }}
         >
-          <TextFields control={control} name="name" label="Name" />
-          <TextFields control={control} name="email" label="Email" />
-          <TextFields control={control} name="password" label="Password" />
           <TextFields
+            errors={errors}
+            control={control}
+            name="name"
+            label="Name"
+          />
+          <TextFields
+            errors={errors}
+            control={control}
+            name="email"
+            label="Email"
+          />
+          <TextFields
+            errors={errors}
+            control={control}
+            name="password"
+            label="Password"
+          />
+          <TextFields
+            errors={errors}
             control={control}
             name="cpassword"
             label="Confirm Password"
           />
-          <CheckBoxFields control={control} name="privacy" />
+          {/* <CheckBoxFields control={control} name="privacy" /> */}
 
           <Button
             type="submit"
