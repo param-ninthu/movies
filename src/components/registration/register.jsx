@@ -9,13 +9,27 @@ import bg from "./../../assets/bg/bg.jpg";
 import { Box, Container, Button } from "@mui/material";
 import TextFields from "./TextField";
 import CheckBoxFields from "./CheckBoxFields";
+import { pawdRegExp } from "../../utils";
 
 const schema = yup.object({
   name: yup.string().required("Name is required"),
+  email: yup.string().required("Email is required").email(),
+  password: yup
+    .string()
+    .required("Password is required")
+    .matches(
+      pawdRegExp,
+      "Must contain 8 characters , one uppercase , one lowercase , one number and one special case character"
+    ),
+  cpassword: yup
+    .string()
+    .required("Confirm Password is required")
+    .oneOf([yup.ref("password"), null], "Password must match"),
 });
 
 const Register = () => {
   const {
+    reset,
     handleSubmit,
     control,
     formState: { errors },
@@ -30,6 +44,7 @@ const Register = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
+    reset();
   };
 
   return (
@@ -81,6 +96,7 @@ const Register = () => {
           <TextFields
             errors={errors}
             control={control}
+            type="password"
             name="password"
             label="Password"
           />
@@ -88,6 +104,7 @@ const Register = () => {
             errors={errors}
             control={control}
             name="cpassword"
+            type="password"
             label="Confirm Password"
           />
           {/* <CheckBoxFields control={control} name="privacy" /> */}
