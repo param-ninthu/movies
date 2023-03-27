@@ -9,10 +9,17 @@ import bg from "./../../assets/bg/bg.jpg";
 import { Box, Container, Button } from "@mui/material";
 import TextFields from "./TextField";
 import CheckBoxFields from "./CheckBoxFields";
-import { pawdRegExp } from "../../utils";
+import { pawdRegExp, usernameRegExp } from "../../utils";
 
 const schema = yup.object({
   name: yup.string().required("Name is required"),
+  username: yup
+    .string()
+    .required("Username is required")
+    .matches(
+      usernameRegExp,
+      "Must contain only letters, numbers and underscore"
+    ),
   email: yup.string().required("Email is required").email(),
   password: yup
     .string()
@@ -36,6 +43,7 @@ const Register = () => {
   } = useForm({
     defaultValues: {
       name: "",
+      username: "",
       email: "",
       password: "",
       cpassword: "",
@@ -86,6 +94,12 @@ const Register = () => {
             control={control}
             name="name"
             label="Name"
+          />
+          <TextFields
+            errors={errors}
+            control={control}
+            name="username"
+            label="Username"
           />
           <TextFields
             errors={errors}
